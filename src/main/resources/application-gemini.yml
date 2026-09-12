@@ -1,7 +1,7 @@
 spring:
-  autoconfigure:
-    exclude:
-      - org.springframework.ai.model.ollama.autoconfigure.OllamaChatAutoConfiguration
+  #  autoconfigure:
+  #    exclude:
+  #      - org.springframework.ai.model.ollama.autoconfigure.OllamaChatAutoConfiguration
   ai:
     google:
       genai:
