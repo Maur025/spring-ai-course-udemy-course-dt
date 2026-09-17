@@ -49,4 +49,9 @@ public class ChatController {
         return ResponseEntity.ok(
             assistantService.diagnoseWithReasoning(request.prompt(), request.model()));
     }
+
+    @PostMapping(value = "/consult")
+    public ResponseEntity<String> consultReasoning(@Valid @RequestBody ChatRequest request) {
+        return ResponseEntity.ok(assistantService.consult(request.prompt(), request.model()));
+    }
 }
