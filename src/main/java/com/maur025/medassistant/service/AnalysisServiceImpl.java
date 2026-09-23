@@ -2,6 +2,7 @@ package com.maur025.medassistant.service;
 
 import com.maur025.medassistant.config.ClientResolver;
 import com.maur025.medassistant.dto.analysis.ConditionSummary;
+import com.maur025.medassistant.dto.analysis.QueryClassification;
 import com.maur025.medassistant.dto.analysis.SymptomAnalysis;
 import jakarta.annotation.PostConstruct;
 import java.util.List;
@@ -88,5 +89,18 @@ public class AnalysisServiceImpl implements AnalysisService {
       .user(message)
       .call()
       .entity(SymptomAnalysis.class);
+  }
+
+  @Override
+  public QueryClassification classifyQuery(String query, String model) {
+    log.info("Clasificación de consulta - modelo: {}", model);
+
+    return clientResolver.resolve(model)
+      .prompt()
+      .user("Clasificá la siguiente consulta de un paciente. "
+        + "Determiná que tipo de consulta es y explicá brevemente por qué.\n\n"
+        + "Consulta del paciente: \"" + query + "\"")
+      .call()
+      .entity(QueryClassification.class);
   }
 }

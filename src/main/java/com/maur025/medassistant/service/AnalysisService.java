@@ -1,7 +1,9 @@
 package com.maur025.medassistant.service;
 
 import com.maur025.medassistant.dto.analysis.ConditionSummary;
+import com.maur025.medassistant.dto.analysis.QueryClassification;
 import com.maur025.medassistant.dto.analysis.SymptomAnalysis;
+
 import java.util.List;
 
 public interface AnalysisService {
@@ -11,4 +13,6 @@ public interface AnalysisService {
   List<ConditionSummary> listRelatedConditions(String symptoms, String model);
 
   SymptomAnalysis analyzeSymptoms(String symptoms, String model);
+
+  QueryClassification classifyQuery(String query, String model);
 }
