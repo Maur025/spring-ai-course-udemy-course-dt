@@ -9,15 +9,27 @@ public class ClientResolver {
 
   private final ChatClient geminiClient;
   private final ChatClient ollamaClient;
+  private final ChatClient openAiClient;
 
   public ClientResolver(@Qualifier("geminiClient") ChatClient geminiClient,
-    @Qualifier("ollamaClient") ChatClient ollamaClient)
+    @Qualifier("ollamaClient") ChatClient ollamaClient,
+    @Qualifier("openAiClient") ChatClient openAiClient)
   {
     this.geminiClient = geminiClient;
     this.ollamaClient = ollamaClient;
+    this.openAiClient = openAiClient;
   }
 
   public ChatClient resolve(String model) {
-    return "ollama".equalsIgnoreCase(model) ? ollamaClient : geminiClient;
+    if (model == null) {
+      return geminiClient;
+    }
+
+    return switch (model.toLowerCase()) {
+      case "ollama" -> ollamaClient;
+      case "gemini" -> geminiClient;
+      case "openai" -> openAiClient;
+      default -> null;
+    };
   }
 }

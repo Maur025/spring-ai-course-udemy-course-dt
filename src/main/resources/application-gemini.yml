@@ -7,5 +7,7 @@ spring:
       genai:
         api-key: ${GOOGLE_AI_API_KEY}
         chat:
-          options:
-            model: gemini-3.1-flash-lite
+          model: gemini-3.1-flash-lite
+          temperature: 0.4
+          top-p: 0.85
+          max-output-tokens: 2048
